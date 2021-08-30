@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Dognition" id="Project_240f" database="MySql" >
+	<comment><![CDATA[Dognition database]]></comment>
+	<schema name="dognition" >
+		<table name="complete_tests" prior="complete_tests_table" >
+			<column name="created_at" type="datetime" jt="93" />
+			<column name="updated_at" type="datetime" jt="93" />
+			<column name="user_guid" type="varchar" length="60" jt="12" />
+			<column name="dog_guid" type="varchar" length="60" jt="12" />
+			<column name="test_name" type="varchar" length="60" jt="12" />
+			<column name="subcategory_name" type="varchar" length="60" jt="12" />
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="dogs" prior="dogs table" >
+			<column name="gender" type="varchar" length="255" jt="12" />
+			<column name="birthday" type="varchar" length="255" jt="12" />
+			<column name="breed" type="varchar" length="255" jt="12" />
+			<column name="weight" type="date" jt="91" />
+			<column name="dog_fixed" type="tinyint" jt="-6" />
+			<column name="dna_tested" type="tinyint" jt="-6" />
+			<column name="created_at" type="datetime" jt="93" />
+			<column name="updated_at" type="datetime" jt="93" />
+			<column name="dimension" type="varchar" length="255" jt="12" />
+			<column name="exclude" type="tinyint" jt="-6" />
+			<column name="breed_type" type="varchar" length="255" jt="12" />
+			<column name="breed_group" type="varchar" length="255" jt="12" />
+			<column name="dog_guid" type="varchar" length="60" jt="12" />
+			<column name="user_guid" type="varchar" length="60" jt="12" />
+			<column name="total_tests_completed" type="varchar" length="255" jt="12" />
+			<column name="mean_iti_days" type="varchar" length="255" jt="12" />
+			<column name="mean_iti_minutes" type="varchar" length="255" jt="12" />
+			<column name="median_iti_days" type="varchar" length="255" jt="12" />
+			<column name="median_iti_minutes" type="varchar" length="255" jt="12" />
+			<column name="time_diff_between_first_and_last_game_days" type="varchar" length="255" jt="12" />
+			<column name="time_diff_between_first_and_last_game_minutes" type="varchar" length="255" jt="12" />
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="exam_answers" prior="exam_answers table" >
+			<column name="script_detail_id" type="int" jt="4" mandatory="y" />
+			<column name="subcategory_name" type="varchar" length="60" jt="12" />
+			<column name="test_name" type="varchar" length="255" jt="12" />
+			<column name="step_type" type="varchar" length="255" jt="12" />
+			<column name="start_time" type="datetime" jt="93" />
+			<column name="end_time" type="datetime" jt="93" />
+			<column name="loop_number" type="int" jt="4" />
+			<column name="dog_guid" type="varchar" length="60" jt="12" />
+			<index name="pk_exam_answers table_script_detail_id" unique="PRIMARY_KEY" >
+				<column name="script_detail_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="reviews table" prior="tbl" >
+			<column name="rating" type="int" jt="4" />
+			<column name="created_at" prior="created_at!" type="datetime" jt="93" />
+			<column name="updated_at" type="datetime" jt="93" />
+			<column name="user_guid" type="varchar" length="60" jt="12" />
+			<column name="dog_guid" type="varchar" length="60" jt="12" />
+			<column name="subcategory_name" type="varchar" length="60" jt="12" />
+			<column name="test_name" type="varchar" length="60" jt="12" />
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="site_activities" prior="site_activities table" >
+			<column name="activity_type" type="varchar" length="150" jt="12" />
+			<column name="description" type="text" jt="-1" />
+			<column name="membership_id" type="int" jt="4" />
+			<column name="category_id" type="int" jt="4" />
+			<column name="script_id" type="int" jt="4" />
+			<column name="created_at" type="datetime" jt="93" />
+			<column name="updated_at" type="datetime" jt="93" />
+			<column name="user_guid" type="varchar" length="255" jt="12" />
+			<column name="script_detail_id" type="int" jt="4" />
+			<column name="test_name" type="varchar" length="255" jt="12" />
+			<column name="dog_guid" type="varchar" length="255" jt="12" />
+		</table>
+		<table name="users" prior="users table" >
+			<comment><![CDATA[Information about the user]]></comment>
+			<column name="sign_in_count" type="int" jt="4" >
+				<comment><![CDATA[number of sign in]]></comment>
+			</column>
+			<column name="created_at" type="datetime" jt="93" >
+				<comment><![CDATA[when their account was created]]></comment>
+			</column>
+			<column name="updated_at" type="datetime" jt="93" >
+				<comment><![CDATA[When was the last update]]></comment>
+			</column>
+			<column name="max_dogs" type="int" jt="4" />
+			<column name="membership_id" type="int" jt="4" mandatory="y" />
+			<column name="subscribed" type="tinyint" jt="-6" />
+			<column name="exclude" type="tinyint" jt="-6" />
+			<column name="free_start_user" type="tinyint" jt="-6" />
+			<column name="membership_type" type="int" jt="4" />
+			<column name="user_guid" type="text" jt="-1" />
+			<column name="city" type="varchar" length="255" jt="12" />
+			<column name="state" type="varchar" length="255" jt="12" />
+			<column name="zip" type="varchar" length="255" jt="12" />
+			<column name="country" type="varchar" length="255" jt="12" />
+			<column name="utc_correction" type="varchar" length="255" jt="12" />
+			<index name="pk_users%table_membership_id" unique="PRIMARY_KEY" >
+				<column name="membership_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+	</schema>
+	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" />
+	<layout name="Default Layout" id="Layout_af" show_relation="columns" >
+		<entity schema="dognition" name="complete_tests" color="C1D8EE" x="880" y="128" />
+		<entity schema="dognition" name="dogs" color="C1D8EE" x="416" y="144" />
+		<entity schema="dognition" name="exam_answers" color="C1D8EE" x="576" y="576" />
+		<entity schema="dognition" name="reviews table" color="C1D8EE" x="864" y="336" />
+		<entity schema="dognition" name="site_activities" color="3986C1" x="144" y="528" />
+		<entity schema="dognition" name="users" color="C1D8EE" x="96" y="160" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[DbSchema is disconnected from the database.
+New designed tables will be saved to project file and later can be create in any database.
+Right-click the layout to create new tables. Drop this callout from its context menu.]]></comment>
+		</callout>
+	</layout>
+</project>
