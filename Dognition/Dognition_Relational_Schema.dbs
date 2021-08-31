@@ -35,7 +35,7 @@ Game, Smell Game, Social Bias, Spatial Navigation).]]></comment>
 			<column name="breed" type="varchar" length="255" jt="12" >
 				<comment><![CDATA[Name of breed]]></comment>
 			</column>
-			<column name="weight" type="date" jt="91" >
+			<column name="weight" type="int" jt="4" >
 				<comment><![CDATA[Weight of the dog (lbs)]]></comment>
 			</column>
 			<column name="dog_fixed" type="tinyint" jt="-6" unsigned="y" >
@@ -45,8 +45,8 @@ Game, Smell Game, Social Bias, Spatial Navigation).]]></comment>
 			<column name="dna_tested" type="tinyint" jt="-6" unsigned="y" >
 				<comment><![CDATA[Flag for whether a dog’s DNA has been tested (1=Yes/0=No)]]></comment>
 			</column>
-			<column name="created_at" type="datetime" jt="93" />
-			<column name="updated_at" type="datetime" jt="93" />
+			<column name="created_at" type="datetime" jt="93" mandatory="y" />
+			<column name="updated_at" type="datetime" jt="93" mandatory="y" />
 			<column name="dimension" type="varchar" length="255" jt="12" >
 				<comment><![CDATA[One of Dognition’s 9 personality profiles (Ace, Charmer,
 Einstein, Expert, Maverick, Protodog, Renaissance-dog,
@@ -98,19 +98,12 @@ dog (in days)]]></comment>
 				<comment><![CDATA[Time difference between the first and last game completed by a
 dog (in minutes)]]></comment>
 			</column>
-			<index name="pk_dogs_dog_guid" unique="PRIMARY_KEY" >
-				<column name="dog_guid" />
-			</index>
 			<fk name="fk_dogs_users" to_schema="dognition" to_table="users" >
 				<fk_column name="user_guid" pk="user_guid" />
 			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
 		<table name="exam_answers" prior="exam_answers table" >
-			<column name="script_detail_id" type="int" jt="4" mandatory="y" >
-				<comment><![CDATA[Number corresponding with the exact webpage a customer was
-on]]></comment>
-			</column>
 			<column name="subcategory_name" type="varchar" length="60" jt="12" >
 				<comment><![CDATA[Name of the cognitive sub-category a test belongs to
 (Communication, Cunning, Empathy, Expression Game,
@@ -135,9 +128,7 @@ which loop the customer was on. Negative numbers represent
 “re-dos.”]]></comment>
 			</column>
 			<column name="dog_guid" type="varchar" length="60" jt="12" mandatory="y" />
-			<index name="pk_exam_answers_script_detail_id" unique="PRIMARY_KEY" >
-				<column name="script_detail_id" />
-			</index>
+			<column name="script_detail_id" type="int" jt="4" />
 			<fk name="fk_exam_answers_dogs" to_schema="dognition" to_table="dogs" >
 				<fk_column name="dog_guid" pk="dog_guid" />
 			</fk>
@@ -146,10 +137,10 @@ which loop the customer was on. Negative numbers represent
 			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
-		<table name="reviews table" prior="tbl" >
-			<column name="created_at" prior="created_at!" type="datetime" jt="93" />
-			<column name="updated_at" type="datetime" jt="93" />
-			<column name="user_guid" type="varchar" length="60" jt="12" mandatory="y" />
+		<table name="reviews" prior="reviews table" >
+			<column name="created_at" prior="created_at!" type="datetime" jt="93" mandatory="y" />
+			<column name="updated_at" type="datetime" jt="93" mandatory="y" />
+			<column name="user_guid" type="varchar" length="60" jt="12" />
 			<column name="subcategory_name" type="varchar" length="60" jt="12" >
 				<comment><![CDATA[Name of the cognitive sub-category a test belongs to
 (Communication, Cunning, Empathy, Expression Game,
@@ -163,7 +154,7 @@ Game, Smell Game, Social Bias, Spatial Navigation).]]></comment>
 name]’s choices?” Users could choose any number between 1
 (not surprising) to 9 (very surprising)]]></comment>
 			</column>
-			<column name="dog_guid" type="varchar" length="60" jt="12" mandatory="y" />
+			<column name="dog_guid" type="varchar" length="60" jt="12" />
 			<fk name="fk_reviews table_dogs" to_schema="dognition" to_table="dogs" >
 				<fk_column name="dog_guid" pk="dog_guid" />
 			</fk>
@@ -205,12 +196,6 @@ on]]></comment>
 			</column>
 			<column name="test_name" type="varchar" length="255" jt="12" />
 			<column name="dog_guid" type="varchar" length="255" jt="12" />
-			<index name="pk_site_activities_script_id" unique="PRIMARY_KEY" >
-				<column name="script_id" />
-			</index>
-			<index name="unq_site_activities_script_detail_id" unique="UNIQUE_KEY" >
-				<column name="script_detail_id" />
-			</index>
 			<fk name="fk_site_activities_users" to_schema="dognition" to_table="users" >
 				<fk_column name="user_guid" pk="user_guid" />
 			</fk>
@@ -226,17 +211,17 @@ on]]></comment>
 			<column name="sign_in_count" type="int" jt="4" >
 				<comment><![CDATA[Number of times a user signs in to his/her Dognition account]]></comment>
 			</column>
-			<column name="created_at" type="datetime" jt="93" >
+			<column name="created_at" type="datetime" jt="93" mandatory="y" >
 				<comment><![CDATA[Time stamp when the record in that row was created]]></comment>
 			</column>
-			<column name="updated_at" type="datetime" jt="93" >
+			<column name="updated_at" type="datetime" jt="93" mandatory="y" >
 				<comment><![CDATA[Time stamp when the record in that row was created (will be the
 same as created_at if the record was never updated)]]></comment>
 			</column>
 			<column name="max_dogs" type="int" jt="4" >
 				<comment><![CDATA[Number of dogs associated with a user]]></comment>
 			</column>
-			<column name="membership_id" type="int" jt="4" mandatory="y" >
+			<column name="membership_id" type="int" jt="4" >
 				<comment><![CDATA[Unique ID]]></comment>
 			</column>
 			<column name="subscribed" type="tinyint" jt="-6" unsigned="y" >
@@ -266,7 +251,7 @@ for free and can then upgrade to unlock the rest. The
 entire 20-game Dognition Assessment for free, but then allows
 user to upgrade to a monthly subscription]]></comment>
 			</column>
-			<column name="user_guid" type="text" jt="-1" mandatory="y" >
+			<column name="user_guid" type="text" jt="-1" >
 				<comment><![CDATA[Unique ID for a human user]]></comment>
 			</column>
 			<column name="city" type="varchar" length="255" jt="12" >
@@ -282,15 +267,6 @@ user to upgrade to a monthly subscription]]></comment>
 				<comment><![CDATA[Country of the user]]></comment>
 			</column>
 			<column name="utc_correction" type="varchar" length="255" jt="12" />
-			<index name="unq_users_user_guid" unique="UNIQUE_KEY" >
-				<column name="user_guid" />
-			</index>
-			<index name="pk_users_user_guid" unique="PRIMARY_KEY" >
-				<column name="user_guid" />
-			</index>
-			<index name="unq_users_membership_id" unique="UNIQUE_KEY" >
-				<column name="membership_id" />
-			</index>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
 		<table name="was in " prior="tbl" >
@@ -313,7 +289,7 @@ on]]></comment>
 		<entity schema="dognition" name="complete_tests" color="C1D8EE" x="912" y="448" />
 		<entity schema="dognition" name="dogs" color="C1D8EE" x="400" y="256" />
 		<entity schema="dognition" name="exam_answers" color="C1D8EE" x="576" y="752" />
-		<entity schema="dognition" name="reviews table" color="C1D8EE" x="896" y="192" />
+		<entity schema="dognition" name="reviews" color="C1D8EE" x="896" y="192" />
 		<entity schema="dognition" name="site_activities" color="3986C1" x="128" y="704" />
 		<entity schema="dognition" name="users" color="C1D8EE" x="112" y="256" />
 		<callout x="48" y="48" pointer="Round" >
