@@ -16,3 +16,10 @@ WHERE stype = 'R'
 GROUP BY saledate
 ORDER BY num_individual_returns DESC;
 
+-- Exercise 6:
+--  What is the maximum price paid for an item in our database?
+--  What is the minimum price paid for an item in our database?
+
+SELECT  MAX(sprice)  AS "maximum price",
+        MIN(sprice) AS "minimum price"
+FROM trnsact
