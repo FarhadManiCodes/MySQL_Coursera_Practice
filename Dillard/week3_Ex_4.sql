@@ -13,6 +13,6 @@ SELECT  trnsact.register as register,
 FROM trnsact
     INNER JOIN skstinfo ON trnsact.store = skstinfo.store
     AND trnsact.sku = skstinfo.sku
-
+WHERE trnsact.stype = 'P' --only purchase
 GROUP BY register
 HAVING register=640
