@@ -137,3 +137,21 @@ SELECT state, count(store) as number_of_stores
 FROM strinfo
 GROUP BY state 
 HAVING count(store) > 10;
+
+-- Question 16
+-- What is the suggested retail price of all the skus in the “reebok” department
+--  with the “skechers” brand and a “wht/saphire” color?    
+SELECT skstinfo.retail AS retail_price,
+        skuinfo.brand as brand,
+        skuinfo.color as color,
+        deptinfo.deptdesc as descript
+
+FROM skuinfo
+JOIN skstinfo
+ON skuinfo.sku = skstinfo.sku
+JOIN deptinfo
+ON deptinfo.dept = deptinfo.dept
+
+WHERE skuinfo.color = 'wht/saphire' AND
+    skuinfo.brand = 'skechers' AND
+    deptinfo.deptdesc = 'reebok'
