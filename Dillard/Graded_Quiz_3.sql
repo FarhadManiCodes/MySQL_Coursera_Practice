@@ -109,3 +109,10 @@ skuinfo.color = 'rinse wash';
 -- meaning that their features differ in the categories represented by the columns?
 -- STYLE and SIZE
 
+-- Question 12
+-- How many skus are in the skuinfo table, but NOT in the skstinfo table?    
+-- When skstinfo is null
+SELECT COUNT(DISTINCT skuinfo.sku)
+FROM skuinfo
+    LEFT JOIN skstinfo ON skuinfo.sku = skstinfo.sku
+WHERE skstinfo.sku IS NULL;
