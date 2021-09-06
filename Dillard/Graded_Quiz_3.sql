@@ -116,3 +116,17 @@ SELECT COUNT(DISTINCT skuinfo.sku)
 FROM skuinfo
     LEFT JOIN skstinfo ON skuinfo.sku = skstinfo.sku
 WHERE skstinfo.sku IS NULL;
+
+-- Question 13
+-- In what city and state is the store that had the greatest total sum of sales?
+SELECT trnsact.store AS store,
+    strinfo.city AS city,
+    strinfo.state AS state,
+    SUM(trnsact.amt) AS sum_total_sales
+FROM trnsact
+    INNER JOIN strinfo ON strinfo.store = trnsact.store
+WHERE trnsact.stype = 'P' --only purchase
+GROUP BY trnsact.store,
+    city,
+    state
+ORDER BY sum_total_sales DESC
