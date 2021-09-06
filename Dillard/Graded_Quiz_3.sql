@@ -129,4 +129,11 @@ WHERE trnsact.stype = 'P' --only purchase
 GROUP BY trnsact.store,
     city,
     state
-ORDER BY sum_total_sales DESC
+ORDER BY sum_total_sales DESC;
+
+-- Question 15
+-- How many states have more than 10 Dillards stores in them?    
+SELECT state, count(store) as number_of_stores
+FROM strinfo
+GROUP BY state 
+HAVING count(store) > 10;
