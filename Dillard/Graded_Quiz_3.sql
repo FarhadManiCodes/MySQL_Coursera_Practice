@@ -57,3 +57,26 @@ SELECT state,
 FROM store_msa
 GROUP BY state
 HAVING state = 'NC';
+
+
+-- 9.What department (with department description), brand, style, and color brought 
+-- in the greatest total amount of sales?    
+
+SELECT TOP 5 skuinfo.dept AS department,
+        deptinfo.deptdesc AS description,
+        skuinfo.brand AS brand,
+        skuinfo.style AS style,
+        skuinfo.color AS color,
+        SUM(trnsact.amt) as total_amount
+
+FROM skuinfo 
+
+JOIN trnsact
+ON skuinfo.sku = trnsact.sku
+
+JOIN deptinfo ON 
+skuinfo.dept = deptinfo.dept
+
+WHERE trnsact.stype = 'P'
+GROUP BY department,description,brand,style,color
+ORDER BY total_amount DESC;
