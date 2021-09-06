@@ -80,3 +80,32 @@ skuinfo.dept = deptinfo.dept
 WHERE trnsact.stype = 'P'
 GROUP BY department,description,brand,style,color
 ORDER BY total_amount DESC;
+
+-- Question 10
+-- How many stores have more than 180,000 distinct skus associated with them in the skstinfo table?    
+SELECT store, 
+        COUNT(DISTINCT sku) AS number_of_skus
+FROM skstinfo
+GROUP BY store 
+HAVING number_of_skus > 180000  
+
+-- Question 11
+-- Look at the data from all the distinct skus in the “cop” department with a 
+-- “federal” brand and a “rinse wash” color.  
+-- You'll see that these skus have the same values in some of the columns, 
+-- meaning that they have some features in common.
+
+SELECT *
+FROM skuinfo 
+JOIN deptinfo 
+ON deptinfo.dept = skuinfo.dept
+
+WHERE 
+deptinfo.deptdesc = 'cop' AND
+skuinfo.brand = 'federal' AND
+skuinfo.color = 'rinse wash';
+
+-- In which columns do these skus have different values from one another,
+-- meaning that their features differ in the categories represented by the columns?
+-- STYLE and SIZE
+
