@@ -42,3 +42,18 @@ FROM trnsact
     INNER JOIN skstinfo ON trnsact.store = skstinfo.store
     AND trnsact.sku = skstinfo.sku
 WHERE trnsact.stype = 'P'; --only purchase
+
+-- Question 8
+
+-- The store_msa table provides population statistics about the geographic location around a store. 
+-- Using one query to retrieve your answer, how many MSAs are there within the state of North Carolina
+-- (abbreviated “NC”), and within these MSAs, 
+-- what is the lowest population level (msa_pop) 
+-- and highest income level (msa_income)?   
+SELECT state,
+        COUNT(msa) AS number_of_msa,
+        MIN(msa_pop) AS lowest_population_level,
+        MAX(msa_income) AS highest_income_level
+FROM store_msa
+GROUP BY state
+HAVING state = 'NC';
