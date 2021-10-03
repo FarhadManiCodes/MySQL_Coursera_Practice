@@ -39,3 +39,19 @@ WHERE
     STYPE = 'P'
 GROUP BY sku
 ORDER BY total_sale_summer DESC;
+
+-- Exercise 3. How many distinct dates are there in the saledate column of the transaction
+-- table for each month/year/store combination in the database? Sort your results by the
+-- number of days per combination in ascending order.
+SELECT
+    STORE,
+    EXTRACT(YEAR from SALEDATE) AS year_n,
+    EXTRACT(MONTH from SALEDATE) AS month_num,
+    COUNT(distinct SALEDATE) as number_of_days
+FROM 
+    TRNSACT
+GROUP BY 
+    year_n,month_num,STORE
+ORDER BY 
+    number_of_days;
+
